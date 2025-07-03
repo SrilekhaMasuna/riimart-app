@@ -1,0 +1,45 @@
+<html lang="en">
+<body>
+<footer>
+</footer>
+
+<div class="toast" id="toast">Added to cart!</div>
+
+<script>
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+    setTimeout(() => { toast.classList.remove("show"); }, 3000);
+}
+
+function addToCart(id, name, price, image) {
+    const cart = JSON.parse(localStorage.getItem("riimart_cart")) || [];
+    const existing = cart.find(p => p.id === id);
+    if (existing) {
+        existing.quantity += 1;
+    } else {
+        cart.push({ id, name, price, quantity: 1, image });
+    }
+    localStorage.setItem("riimart_cart", JSON.stringify(cart));
+    showToast(`${name} added to cart!`);
+}
+
+const token = localStorage.getItem("token");
+
+if (token) {
+    document.getElementById("logoutLink").style.display = "inline-block";
+    document.getElementById("loginLink").style.display = "none";
+}
+
+// Logout logic
+document.getElementById("logoutLink").addEventListener("click", function (e) {
+    e.preventDefault();
+    localStorage.removeItem("token");
+    localStorage.removeItem("userEmail");
+    alert("Logged out successfully!");
+    window.location.href = "login.html";
+});
+</script>
+</body>
+</html>

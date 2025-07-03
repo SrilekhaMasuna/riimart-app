@@ -1,0 +1,54 @@
+<html lang="en">
+<body>
+<main>
+    <div class="register-container">
+        <h2>Create Your RiiMart Account</h2>
+        <form onsubmit="handleRegister(event)">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" required placeholder="Enter your username" />
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required placeholder="Enter your email" />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required placeholder="Enter a password" minlength="6" />
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" required placeholder="Confirm your password" minlength="6" />
+            </div>
+            <button type="submit" class="btn-primary">Register</button>
+        </form>
+        <p class="auth-switch">Already have an account? <a href="login.html">Login here</a></p>
+    </div>
+</main>
+
+<footer class="footer">
+    <p>&copy; 2025 RiiMart. All rights reserved.</p>
+</footer>
+
+<!-- just the <script> block at the bottom of register.html -->
+<script>
+async function handleRegister(e) {
+    e.preventDefault();
+
+    const username = document.getElementById("username").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirm-password").value;
+
+    // Email format regex
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address.");
+        return;
+    }
+
+    // Additional validation logic can go here...
+}
+</script>
+</body>
+</html>
